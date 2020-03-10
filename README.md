@@ -3,6 +3,8 @@ Some useful code for interacting with EMsoft in MATLAB. These programs also allo
 
 *Different versions of EMsoft have separate code here because of the differences in pattern orientation. Using the incorrect version can lead to incorrect indexing (and may not give an error). We have only tested EMsoft v4.0 and v4.3. Please let us know if one or neither of these versions seems to work for you.*
 
+More information about EMsoft can be found at: https://github.com/EMsoft-org/EMsoft
+
 Program descriptions:
 - FindMapPoints_edaxang.m: Script that plots data from an EDAX .ang file and lets you click on points to extract info for that map point.
 - GetPatternCenter_edaxang.m: Script that extracts pattern center from an EDAX .ang file and converts it to EMsoft coordinates.
