@@ -17,4 +17,6 @@ Program descriptions:
 - CombineAngFiles.m: Use to stitch together data from multiple .ang files (one phase each), selecting the phase with the highest NDP.
 - TestErrorsTimings.m: Use this program to report errors and timings for EMsoft's EMEBSDDI program. Certain combinations of number of threads, numexptsingle/numdictsingle, and orientations causes errors (bug in EMsoft). Parameter values also greatly affect speed.
 
+A walkthrough of how to perform a dictionary indexing run using EMsoft-utilities can be found in the file Instructions.pdf.
+
 Some of these programs currently only work for EDAX .ang data. Please contact me if you would like the code adapted to data in another format. Feel free to email me at epang@mit.edu if you have any questions/difficulties/suggestions.
