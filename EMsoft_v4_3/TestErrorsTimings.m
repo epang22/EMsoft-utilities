@@ -1,5 +1,4 @@
 %TESTERRORSTIMINGS
-% Figure out parameters for FindParameters.m
 % Test performance of EMEBSDDI, reporting errors and timings.
 % Loop through:
 % -nthreads: number of threads
