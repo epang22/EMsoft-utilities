@@ -158,7 +158,7 @@ if convertimg==0    % already uint8, directly save as .data file
         % if at end of even row in hex grid, need to add a dummy pattern
         if issquare==0  % only an issue for hex grids
             if mod(ii,ncols_even+ncols_odd)==0
-                im_bin = single(zeros(imageheight,imagewidth));     % Make dummy EBSD pattern (completely black) as missing data entry
+                im_bin = single(randi([0 255],imageheight,imagewidth));     % Make dummy EBSD pattern (random noise) as missing data entry
 
                 % Make a 1D vector of image
                 p = zeros(imageheight*imagewidth,1);     % Initialize vector
@@ -226,7 +226,7 @@ else
         % if at end of even row in hex grid, need to add a dummy pattern
         if issquare==0  % only an issue for hex grids
             if mod(ii,ncols_even+ncols_odd)==0
-                im_bin = single(zeros(imageheight,imagewidth));     % Make dummy EBSD pattern (completely black) as missing data entry
+                im_bin = single(randi([0 255],imageheight,imagewidth));     % Make dummy EBSD pattern (random noise) as missing data entry
 
                 % Make a 1D vector of image
                 p = zeros(imageheight*imagewidth,1);     % Initialize vector
