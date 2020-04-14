@@ -117,7 +117,7 @@ system(sprintf('EMEBSD %s',nmlpath));
 h5path = fullfile(homepath,path,'EBSDout.h5');
 data = h5read(h5path,'/EMData/EBSD/EBSDPatterns');
 for ii = 1:size(data,3)
-    img = data(:,:,ii)';    %% Use this line for EMsoft 4.3
+    % img = data(:,:,ii)';    %% Use this line for EMsoft 4.3
     img = flipud(data(:,:,ii)');     % invert and flip array so that image is oriented properly (TSL convention)  %%Use this line for EMsoft 4.0, not for 4.3 
     s = strcat(outputname,'_',num2str(ii),imagetype);   % figure out file name
     outputpath = fullfile(homepath,path,s);
