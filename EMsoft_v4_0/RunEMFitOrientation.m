@@ -91,13 +91,10 @@ fprintf(fid,' &RefineOrientations\n');
 fprintf(fid,' nthreads = %g,\n',nthreads);
 fprintf(fid,' dotproductfile = ''%s'',\n',h5inputpath_short);
 fprintf(fid,' ctffile = ''%s'',\n',ctfpath_short);
-fprintf(fid,' tmpfile = ''EMEBSDDict_tmp.data'',\n');
 fprintf(fid,' modality = ''EBSD'',\n');
 fprintf(fid,' inRAM = .FALSE.,\n');
 fprintf(fid,' matchdepth = 1,\n');
 fprintf(fid,' method = ''FIT'',\n');
-fprintf(fid,' niter = 1,\n');
-fprintf(fid,' nmis = 1,\n');
 fprintf(fid,' step = %g,\n',step);
 if exist('pseudosym','var')
     fprintf(fid,' PSvariantfile = ''%s''\n',pspath_short);
