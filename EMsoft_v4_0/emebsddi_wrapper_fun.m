@@ -2,7 +2,9 @@ function emebsddi_wrapper_fun( data )
 %EMEBSDDI_WRAPPER_FUN
 % Run EMsoft EMEBSDDI program to perform dictionary indexing
 % Unlike EMsoft itself, this code can handle hexagonal grid data
-% 2/22/20 (Edward Pang, MIT)
+% Original: 2/22/20 (Edward Pang, MIT)
+% Change log:
+% -4/20/21 ELP: fix .nml file so it works for EMsoft 4.0
 %
 %%% Input: 'data', a struct containing the following fields:
 % %%% INPUT PARAMETERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -149,8 +151,8 @@ fprintf(fid,' stepY = 1.0,\n');
 fprintf(fid,' nnk = 50,\n');        % # of top dot products to save
 fprintf(fid,' nnav = 20,\n');       % # of top matches to use for orientation averaging (<nnk)
 fprintf(fid,' nosm = 20,\n');       % # of top matches to use for Orientation Similarity Map computation (<nnk)
-fprintf(fid,' nism = 5,\n');        % # of top matches to use for Indexing Success Map computation (<nnk)
-fprintf(fid,' isangle = 1.5,\n');   % indexing success threshold angle (deg)
+% fprintf(fid,' nism = 5,\n');        % # of top matches to use for Indexing Success Map computation (<nnk)   %%% Not in EMsoft 4.0
+% fprintf(fid,' isangle = 1.5,\n');   % indexing success threshold angle (deg)   %%% Not in EMsoft 4.0
 fprintf(fid,' maskfile = ''undefined'',\n');
 fprintf(fid,' maskpattern = ''%s'',\n',maskpattern);
 fprintf(fid,' maskradius = %.0f,\n',maskradius);
