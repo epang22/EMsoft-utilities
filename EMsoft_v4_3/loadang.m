@@ -16,7 +16,9 @@ function [euler, x, y, IQ, CI, phase, fit, phaseinfo, grid, PC] = loadang(inputp
 % -phaseinfo: mx4 cell array. each row is phase, col1=phase id, col2=materialname, col3=symmetry id, col4: lattice param [a b c alpha beta gamma] (A, deg)
 % -grid: 1x6 cell array [gridtype xstep ystep ncols_odd ncols_even nrows]
 % -PC: 1x4 array [xstar ystar zstar WD]
-% 1/16/20 (Edward Pang, MIT)
+% Original: 1/16/20 (Edward Pang, MIT)
+% Change log:
+% -4/20/21 ELP: make compatible with new .ang headers
 
 
 
@@ -26,13 +28,26 @@ C = textscan(fileID,'%s','Delimiter','\r');
 fclose(fileID);
 
 
-% Loop through each line to find start of map data
-for ii=1:length(C{1})
-    if ~isempty(regexp(C{1}{ii},'SCANID','once'))
-        datastartindex = ii+2;  % index of C where data begins
-        break
+%%% Loop through each line to find start of map data
+nh = regexp(C{1}{1},'# HEADER: Start','once');    % =1 if file starts with '# HEADER: Start', empty otherwise
+if ~isempty(nh)
+    % New .ang files, where data starts line after # HEADER: End (and first line of .ang file is # HEADER: Start)
+    for ii=1:length(C{1})
+        if ~isempty(regexp(C{1}{ii},'# HEADER: End','once'))
+            datastartindex = ii+1;  % index of C where data begins
+            break
+        end
+    end
+else
+    % Old .ang files, where data starts a couple lines after # SCANID
+    for ii=1:length(C{1})
+        if ~isempty(regexp(C{1}{ii},'SCANID','once'))
+            datastartindex = ii+2;  % index of C where data begins
+            break
+        end
     end
 end
+
 N = length(C{1}) - datastartindex + 1;  % number of map points
 offset = datastartindex - 1;    % difference in array index between C and my stored data arrays below
 
