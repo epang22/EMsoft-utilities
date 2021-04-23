@@ -3,7 +3,9 @@
 % obtain coordinates and other info
 % EDAX/TSL coordinate system
 % Fill in INPUT PARAMETERS section with desired parameters
-% 2/22/20 (Edward Pang, MIT)
+% Original: 2/22/20 (Edward Pang, MIT)
+% Change log:
+% -4/23/21 ELP: fix bug was outputting 1 row off, change output to 0-indexing
 
 clear
 
@@ -101,6 +103,7 @@ ylim([min(y) max(y)]);
 
 
 % print column labels
+fprintf('Index numbers begin with 0 for the first pattern.\n');  
 fprintf(' index:        x,        y.       phi1,        PHI,       phi2,         CI,         IQ,        fit\n');  
 
 
@@ -120,16 +123,16 @@ function ImageClickCallback(objectHandle,~,xvectorodd,xvectoreven,yvector,ncolso
     if mod(iy,2)==0   % even row
         [~,ix] = min(abs(xvectoreven-xclick));
         x = xvectoreven(ix);    % nearest x value
-        index = (iy/2)*ncolsodd + (iy/2-1)*ncolseven + ix - 1;  % linear index of this point
+        index = (iy/2)*ncolsodd + (iy/2-1)*ncolseven + ix;  % linear index of this point (1-index)
     else    % odd row
         [~,ix] = min(abs(xvectorodd-xclick));
         x = xvectorodd(ix);    % nearest x value
-        index = ((iy-1)/2)*ncolsodd + ((iy-1)/2)*ncolseven + ix - 1;  % linear index of this point
+        index = ((iy-1)/2)*ncolsodd + ((iy-1)/2)*ncolseven + ix;  % linear index of this point (1-index)
     end
     
     hold on; plot(xclick,yclick,'ok');    % plot marker at nearest grid point to where you clicked
     
     % print relevant info to screen
-    fprintf('%6.0f: %8.4f, %8.4f. %10.4f, %10.4f, %10.4f, %10.4f, %10.4f, %10.4f\n',index,x,y,phi1(index),PHI(index),phi2(index),CI(index),IQ(index),fit(index));
+    fprintf('%6.0f: %8.4f, %8.4f. %10.4f, %10.4f, %10.4f, %10.4f, %10.4f, %10.4f\n',index-1,x,y,phi1(index),PHI(index),phi2(index),CI(index),IQ(index),fit(index));
 end
 
