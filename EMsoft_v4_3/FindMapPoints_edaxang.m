@@ -5,7 +5,8 @@
 % Fill in INPUT PARAMETERS section with desired parameters
 % Original: 2/22/20 (Edward Pang, MIT)
 % Change log:
-% -4/23/21 ELP: fix bug was outputting 1 row off, change output to 0-indexing
+% -4/23/21 ELP: fix bug was outputting 1 row off, change output to 
+% 0-indexing, add phase to output
 
 clear
 
@@ -27,7 +28,7 @@ homepath = '/home/eddie/EMsoftfiles/EMData/';  % path to EMdatapathname (don't n
 
 % Read in .ang file
 fullpath = fullfile(homepath,angfile);
-[euler, x, y, IQ, CI, ~, fit, ~, grid, ~] = loadang(fullpath, 1);
+[euler, x, y, IQ, CI, phase, fit, ~, grid, ~] = loadang(fullpath, 1);
 
 N = length(x);  % number of map points
 xstep = grid{2};
@@ -87,13 +88,13 @@ for ii=1:Ncolors
     
     % add to plot
     plot(x(index),y(index),'o','MarkerEdgeColor',colors(ii,:),'MarkerFaceColor',colors(ii,:),'MarkerSize',markersize,...
-        'ButtonDownFcn',{@ImageClickCallback,xvectorodd,xvectoreven,yvector,ncolsodd,ncolseven,phi1,PHI,phi2,CI,IQ,fit}); hold on;
+        'ButtonDownFcn',{@ImageClickCallback,xvectorodd,xvectoreven,yvector,ncolsodd,ncolseven,phi1,PHI,phi2,CI,IQ,fit,phase}); hold on;
 end
 
 % add max point
 [~,imax] = max(data);
 plot(x(imax),y(imax),'o','MarkerEdgeColor',colors(end,:),'MarkerFaceColor',colors(end,:),'MarkerSize',markersize,...
-    'ButtonDownFcn',{@ImageClickCallback,xvectorodd,xvectoreven,yvector,ncolsodd,ncolseven,phi1,PHI,phi2,CI,IQ,fit});
+    'ButtonDownFcn',{@ImageClickCallback,xvectorodd,xvectoreven,yvector,ncolsodd,ncolseven,phi1,PHI,phi2,CI,IQ,fit,phase});
 
 % tweak plot
 set(gca,'Ydir','reverse');  % OIM map convention y pointing down
@@ -104,12 +105,12 @@ ylim([min(y) max(y)]);
 
 % print column labels
 fprintf('Index numbers begin with 0 for the first pattern.\n');  
-fprintf(' index:        x,        y.       phi1,        PHI,       phi2,         CI,         IQ,        fit\n');  
+fprintf(' index:        x,        y,       phi1,        PHI,       phi2,       CI,         IQ,      fit,    phase\n');  
 
 
 
 % define function for click callback
-function ImageClickCallback(objectHandle,~,xvectorodd,xvectoreven,yvector,ncolsodd,ncolseven,phi1,PHI,phi2,CI,IQ,fit)
+function ImageClickCallback(objectHandle,~,xvectorodd,xvectoreven,yvector,ncolsodd,ncolseven,phi1,PHI,phi2,CI,IQ,fit,phase)
     % extract x and y coordinates where you clicked    
     axesHandle = get(objectHandle,'Parent');
     coordinates = get(axesHandle,'CurrentPoint'); 
@@ -133,6 +134,6 @@ function ImageClickCallback(objectHandle,~,xvectorodd,xvectoreven,yvector,ncolso
     hold on; plot(xclick,yclick,'ok');    % plot marker at nearest grid point to where you clicked
     
     % print relevant info to screen
-    fprintf('%6.0f: %8.4f, %8.4f. %10.4f, %10.4f, %10.4f, %10.4f, %10.4f, %10.4f\n',index-1,x,y,phi1(index),PHI(index),phi2(index),CI(index),IQ(index),fit(index));
+    fprintf('%6.0f: %8.4f, %8.4f, %10.4f, %10.4f, %10.4f, %8.4f, %10.4f, %8.4f, %8.0f\n',index-1,x,y,phi1(index),PHI(index),phi2(index),CI(index),IQ(index),fit(index),phase(index));
 end
 
