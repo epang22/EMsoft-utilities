@@ -1,7 +1,9 @@
 %GETPATTERNCENTER_EDAXANG
 % Get pattern center in EMsoft coordinates from EDAX .ang file
 % Fill in INPUT PARAMETERS section with desired parameters
-% 1/16/20 (Edward Pang, MIT)
+% Original: 1/16/20 (Edward Pang, MIT)
+% Change log:
+% -4/24/21 ELP: change xpc sign to match new coordinate system
 
 clear
 
@@ -33,7 +35,7 @@ zstar = PC(3);
 
 % convert to EMsoft coordinates
 L = zstar*numsx*delta;
-xpc = numsx*(xstar-0.5);
+xpc = -1*numsx*(xstar-0.5);
 ypc = numsy*(ystar-0.5);
 
 
