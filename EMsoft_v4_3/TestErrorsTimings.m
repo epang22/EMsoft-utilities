@@ -6,7 +6,8 @@
 % -N_ori: number of orientations
 % Fill in INPUT PARAMETERS section with desired parameters
 % 2/21/20 (Edward Pang, MIT)
-
+% Change log:
+% -5/23/21 ELP: fix print bug
 
 clear
 
