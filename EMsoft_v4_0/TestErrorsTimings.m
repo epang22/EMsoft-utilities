@@ -7,7 +7,8 @@
 % -N_ori: number of orientations
 % Fill in INPUT PARAMETERS section with desired parameters
 % 2/21/20 (Edward Pang, MIT)
-
+% Change log:
+% -5/23/21 ELP: fix print bug
 
 clear
 
@@ -85,7 +86,7 @@ n_N_ori = length(N_ori);
 
 
 % print header
-fprintf('nthreads    N_ori  numsingle   # errors?  time(s)    ori/s\n');
+fprintf('nthreads  numsingle    N_ori   # errors?  time(s)    ori/s\n');
 
 
 % loop through parameters and call EMEBSDDI
@@ -97,7 +98,7 @@ for ii=1:n_nthreads
         data.numexptsingle = numsingle(jj);   % number of experiment files "
 
         for kk=1:n_N_ori
-            fprintf('%8.0f %8.0f %10.0f    ',nthreads(ii),numsingle(jj),N_ori(kk));
+            fprintf('%8.0f %10.0f %8.0f    ',nthreads(ii),numsingle(jj),N_ori(kk));
             
             % make N euler angles
             euler = zeros(N_ori(kk),3);
